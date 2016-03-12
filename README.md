@@ -1,4 +1,7 @@
 # Onboarder
+
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 Onboarding Library for Android
 Inspired by [Onboard](https://github.com/mamaral/Onboard) for iOS.  
 This is a simple library to quickly create Onboarding inside your app.  
@@ -118,7 +121,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependencies:
 ```
 dependencies {
-		compile 'com.github.User:Repo:Tag'
+		compile 'com.github.jrejaud:Onboarder:v0.01'
 	}
 ```
 
