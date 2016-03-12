@@ -1,10 +1,14 @@
 # Onboarder
 Onboarding Library for Android
-Inspired by [Onboard](https://github.com/mamaral/Onboard) for iOS
-This is a simple library to quickly (and simply) create an Onboarding Activity
+Inspired by [Onboard](https://github.com/mamaral/Onboard) for iOS.  
+This is a simple library to quickly create Onboarding inside your app.  
 
 A (very) simple example
 =====
+
+<img src="https://github.com/jrejaud/Onboarder/blob/master/page1.png?raw=true" height="400px" />
+<img src="https://github.com/jrejaud/Onboarder/blob/master/page2.png?raw=true" height="400px" />
+<img src="https://github.com/jrejaud/Onboarder/blob/master/page3.png?raw=true" height="400px" />
 
 
 Usage
