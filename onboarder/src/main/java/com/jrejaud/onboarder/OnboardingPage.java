@@ -14,6 +14,14 @@ public class OnboardingPage implements Serializable {
     private @DrawableRes
     int imageResId;
 
+    public interface onButtonClickedListener {
+        void onButtonClicked();
+    }
+
+    //Set these to null by default and set the value if the user sets a button
+    private String buttonText = null;
+    private onButtonClickedListener onButtonClickedListener = null;
+
     public String getTitle() {
         return title;
     }
@@ -26,6 +34,10 @@ public class OnboardingPage implements Serializable {
         return imageResId;
     }
 
+    public String getButtonText() {
+        return buttonText;
+    }
+
     public OnboardingPage(@Nullable String title,@Nullable String bodyText) {
         this.title = title;
         this.bodyText = bodyText;
@@ -36,4 +48,14 @@ public class OnboardingPage implements Serializable {
         this.bodyText = bodyText;
         this.imageResId = imageResId;
     }
+
+    public OnboardingPage.onButtonClickedListener getOnButtonClickedListener() {
+        return onButtonClickedListener;
+    }
+
+    public void setButton(String buttonText, OnboardingPage.onButtonClickedListener onButtonClickedListener) {
+        this.buttonText = buttonText;
+        this.onButtonClickedListener = onButtonClickedListener;
+    }
+
 }

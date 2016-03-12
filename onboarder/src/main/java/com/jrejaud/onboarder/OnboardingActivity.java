@@ -17,7 +17,7 @@ import com.github.jrejaud.viewpagerindicator2.CirclePageIndicator;
 import java.io.Serializable;
 import java.util.List;
 
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
     private final static String BACKGROUND_IMAGE_RES_ID = "BACKGROUND_IMAGE_RES_ID";
     private @DrawableRes int backgroundImageResId;
     private final static String BACKGROUND_COLOR_RES_ID = "BACKGROUND_COLOR_RES_ID";
@@ -124,12 +124,17 @@ public class OnboardingActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             //Build a new fragment from an Onboarding Page (Since Fragment bundles don't seem to be serializable
-            return OnboardingFragment.newInstance(onboardingPages.get(position));
+            return OnboardingFragment.newInstance(onboardingPages.get(position),position);
         }
 
         @Override
         public int getCount() {
             return onboardingPages.size();
         }
+    }
+
+    @Override
+    public void onOnboardingClick(int position) {
+        onboardingPages.get(position).getOnButtonClickedListener().onButtonClicked();
     }
 }
