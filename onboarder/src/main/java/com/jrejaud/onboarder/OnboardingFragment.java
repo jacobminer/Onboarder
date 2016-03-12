@@ -21,7 +21,7 @@ public class OnboardingFragment extends Fragment implements Serializable {
     private static final String TITLE = "TITLE";
     private final static String TITLE_TEXT_COLOR = "TITLE_TEXT_COLOR";
     private static final String BODY_TEXT = "BODY_TEXT";
-    private final static String BODY_TEXT_COLOR = "TITLE_TEXT_COLOR";
+    private final static String BODY_TEXT_COLOR = "BODY_TEXT_COLOR";
     private static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     private static final String POSITION = "POSITION";
     private static final String  BUTTON_TEXT = "BUTTON_TEXT";
