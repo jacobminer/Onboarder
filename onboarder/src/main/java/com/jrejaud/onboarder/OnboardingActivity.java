@@ -34,6 +34,8 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
 
     private OnboardingFragmentPagerAdapter onboardingFragmentPagerAdapter;
 
+    private ViewPager viewPager;
+
     //region Static Factory Methods
     public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, @NonNull List<OnboardingPage> onboardingPages) {
         Bundle bundle = new Bundle();
@@ -72,7 +74,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
 
         onboardingPages = (List<OnboardingPage>) bundle.getSerializable(ONBOARDING_FRAGMENT_LIST);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
+        viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
         CirclePageIndicator circlePageIndicator = (CirclePageIndicator)findViewById(R.id.onboadring_page_indicator);
 
         onboardingFragmentPagerAdapter = new OnboardingFragmentPagerAdapter(getSupportFragmentManager());
@@ -119,13 +121,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
             return;
         }
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.onboarding_layout, onboardingFragmentPagerAdapter.getItem(currentPosition + 1));
-
-        //Let the user use the back button to go back to the previous fragment
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fragmentTransaction.commit();
+        viewPager.setCurrentItem(currentPosition+1);
     }
 
     private class OnboardingFragmentPagerAdapter extends FragmentPagerAdapter {

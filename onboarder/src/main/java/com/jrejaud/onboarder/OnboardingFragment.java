@@ -15,14 +15,6 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link OnboardingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OnboardingFragment extends Fragment implements Serializable {
 
     // the fragment initialization parameters
@@ -37,16 +29,6 @@ public class OnboardingFragment extends Fragment implements Serializable {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-//     * @param title The title which is displayed at the top of the fragment.
-//     * @param bodyText The body text which is displayed in the middle of the fragment.
-//     * @param imageResId The image resource which is displayed in the middle of the fragment, above the text
-     * @return A new instance of fragment OnboardingFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static OnboardingFragment newInstance(OnboardingPage onboardingPage, int position) {
         OnboardingFragment fragment = new OnboardingFragment();
         Bundle args = new Bundle();
@@ -55,7 +37,6 @@ public class OnboardingFragment extends Fragment implements Serializable {
         args.putInt(IMAGE_RESOURCE_ID, onboardingPage.getImageResId());
         args.putInt(POSITION, position);
         args.putString(BUTTON_TEXT, onboardingPage.getButtonText());
-//        args.putSerializable(BUTTON_BACKGROUND_COLOR,onboardingPage.getButtonColorResId());
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,8 +59,6 @@ public class OnboardingFragment extends Fragment implements Serializable {
         final int position = bundle.getInt(POSITION, 0);
         /* The button text (if the user set any) */
         String buttonText = bundle.getString(BUTTON_TEXT, null);
-
-//        @ColorRes int buttonBackgroundColor = bundle.getInt(BUTTON_BACKGROUND_COLOR,-1);
 
         TextView titleTextView = (TextView) view.findViewById(R.id.onboarding_fragment_title);
         TextView bodyTextView = (TextView) view.findViewById(R.id.onboarding_fragment_body_text);
