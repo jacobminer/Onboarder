@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,6 +39,8 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     /** Whether the pagination dots at the bottom of the activity should be down of not */
     private final static String HIDE_DOT_PAGINATION = "HIDE_DOT_PAGINATION";
     private boolean hideDotPagination;
+
+    private OnboardingFragmentPagerAdapter onboardingFragmentPagerAdapter;
 
     //region Static Factory Methods
     public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, @NonNull List<OnboardingPage> onboardingPages) {
@@ -84,6 +87,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_onboarding);
 
         //Try to hide the support action bar
         getSupportActionBar().hide();
@@ -97,14 +101,18 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
         backgroundColorResId = bundle.getInt(BACKGROUND_COLOR_RES_ID,-1);
         onboardingPages = (List<OnboardingPage>) bundle.getSerializable(ONBOARDING_FRAGMENT_LIST);
 
+        ViewPager viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
+        CirclePageIndicator circlePageIndicator = (CirclePageIndicator)findViewById(R.id.onboadring_page_indicator);
+
+        onboardingFragmentPagerAdapter = new OnboardingFragmentPagerAdapter(getSupportFragmentManager());
+
         //Set the view pager
         if (swipingEnabled) {
-            setContentView(R.layout.activity_onboarding);
-            ViewPager viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
-            viewPager.setAdapter(new OnboardingFragmentPagerAdapter(getSupportFragmentManager()));
+            viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
+            viewPager.setAdapter(onboardingFragmentPagerAdapter);
 
             //Set the dot pagination. It can only be set if swiping is enabled.
-            CirclePageIndicator circlePageIndicator = (CirclePageIndicator)findViewById(R.id.onboadring_page_indicator);
+            circlePageIndicator = (CirclePageIndicator)findViewById(R.id.onboadring_page_indicator);
             if (!hideDotPagination) {
                 circlePageIndicator.setViewPager(viewPager);
             } else {
@@ -113,7 +121,13 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
 
         } else {
             //Non-swiping version
-            setContentView(R.layout.activity_onboarding);
+            viewPager.setVisibility(View.GONE);
+            circlePageIndicator.setVisibility(View.GONE);
+
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.onboarding_layout, onboardingFragmentPagerAdapter.getItem(0));
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            fragmentTransaction.commit();
         }
 
         //Set the background Image or Color
@@ -124,6 +138,22 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
             getWindow().getDecorView().setBackgroundColor(getResources().getColor(backgroundColorResId));
         }
 
+    }
+
+    /** Convenience method invoked by the user to make to the next page in the list (if there are any left) */
+    private void goToNextPage(int currentPosition) {
+        if (currentPosition+1>=onboardingFragmentPagerAdapter.getCount()) {
+            Log.e(OnboardingActivity.class.getSimpleName(),"You cannot go to the next onboarding page if it is the last one in the list");
+            return;
+        }
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.onboarding_layout, onboardingFragmentPagerAdapter.getItem(currentPosition + 1));
+
+        //Let the user use the back button to go back to the previous fragment
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.commit();
     }
 
     private class OnboardingFragmentPagerAdapter extends FragmentPagerAdapter {
