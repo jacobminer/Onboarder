@@ -1,5 +1,6 @@
 package com.jrejaud.onboarder;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
@@ -52,33 +53,20 @@ public class OnboardingFragment extends Fragment implements Serializable {
      * @return A new instance of fragment OnboardingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static OnboardingFragment newInstance(String title, String bodyText,@DrawableRes int imageResId) {
+    public static OnboardingFragment newInstance(OnboardingPage onboardingPage) {
         OnboardingFragment fragment = new OnboardingFragment();
         Bundle args = new Bundle();
-        args.putString(TITLE, title);
-        args.putString(BODY_TEXT, bodyText);
-        args.putInt(IMAGE_RESOURCE_ID, imageResId);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static OnboardingFragment newInstance(String title, String bodyText) {
-        OnboardingFragment fragment = new OnboardingFragment();
-        Bundle args = new Bundle();
-        args.putString(TITLE, title);
-        args.putString(BODY_TEXT, bodyText);
+        args.putString(TITLE, onboardingPage.getTitle());
+        args.putString(BODY_TEXT, onboardingPage.getBodyText());
+        args.putInt(IMAGE_RESOURCE_ID, onboardingPage.getImageResId());
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            title = getArguments().getString(TITLE);
-            bodyText = getArguments().getString(BODY_TEXT);
-            imageResId = getArguments().getInt(IMAGE_RESOURCE_ID);
-        }
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //TODO get a reference to the activity here
     }
 
     @Override

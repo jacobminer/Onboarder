@@ -24,7 +24,7 @@ public class OnboardingActivity extends AppCompatActivity {
     private @ColorRes int backgroundColorResId;
 
     private final static String ONBOARDING_FRAGMENT_LIST = "ONBOARDING_FRAGMENT_LIST";
-    private List<OnboardingFragment> onboardingFragmentList; //TODO make this an array instead?
+    private List<OnboardingPage> onboardingPages;
 
     public final static String SWIPING_ENABLED = "SWIPING_ENABLED";
 
@@ -36,43 +36,43 @@ public class OnboardingActivity extends AppCompatActivity {
     private boolean hideDotPagination;
 
     //region Static Factory Methods
-    public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, @NonNull List<OnboardingFragment> onboardingFragmentList) {
+    public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, @NonNull List<OnboardingPage> onboardingPages) {
         Bundle bundle = new Bundle();
         bundle.putInt(BACKGROUND_IMAGE_RES_ID, backgroundImageResId);
 
         //Lists are serializable in Java
-        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingFragmentList);
+        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingPages);
         return bundle;
     }
 
-    public static Bundle newBundleColorBackground(@ColorRes int backgroundColorResId, @NonNull List<OnboardingFragment> onboardingFragmentList) {
+    public static Bundle newBundleColorBackground(@ColorRes int backgroundColorResId, @NonNull List<OnboardingPage> onboardingPages) {
         Bundle bundle = new Bundle();
         bundle.putInt(BACKGROUND_COLOR_RES_ID, backgroundColorResId);
 
         //Lists are serializable in Java
-        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingFragmentList);
+        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingPages);
         return bundle;
     }
 
-    public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, boolean swipingEnabled, boolean hideDotPagination, @NonNull List<OnboardingFragment> onboardingFragmentList) {
+    public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, boolean swipingEnabled, boolean hideDotPagination, @NonNull List<OnboardingPage> onboardingPages) {
         Bundle bundle = new Bundle();
         bundle.putInt(BACKGROUND_IMAGE_RES_ID, backgroundImageResId);
         bundle.putBoolean(SWIPING_ENABLED, swipingEnabled);
         bundle.putBoolean(HIDE_DOT_PAGINATION, hideDotPagination);
 
         //Lists are serializable in Java
-        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingFragmentList);
+        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingPages);
         return bundle;
     }
 
-    public static Bundle newBundleColorBackground(@ColorRes int backgroundColorResId, boolean swipingEnabled, boolean hideDotPagination, @NonNull List<OnboardingFragment> onboardingFragmentList) {
+    public static Bundle newBundleColorBackground(@ColorRes int backgroundColorResId, boolean swipingEnabled, boolean hideDotPagination, @NonNull List<OnboardingPage> onboardingPages) {
         Bundle bundle = new Bundle();
         bundle.putInt(BACKGROUND_COLOR_RES_ID, backgroundColorResId);
         bundle.putBoolean(SWIPING_ENABLED, swipingEnabled);
         bundle.putBoolean(HIDE_DOT_PAGINATION, hideDotPagination);
 
         //Lists are serializable in Java
-        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingFragmentList);
+        bundle.putSerializable(ONBOARDING_FRAGMENT_LIST, (Serializable) onboardingPages);
         return bundle;
     }
     //endregion
@@ -86,11 +86,11 @@ public class OnboardingActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         //Todo need to implement a non-swiping version
-        swipingEnabled = bundle.getBoolean(SWIPING_ENABLED,true);
+        swipingEnabled = bundle.getBoolean(SWIPING_ENABLED, true);
         hideDotPagination = bundle.getBoolean(HIDE_DOT_PAGINATION, false);
         backgroundImageResId = bundle.getInt(BACKGROUND_IMAGE_RES_ID, -1); //-1 means that no image was passed
         backgroundColorResId = bundle.getInt(BACKGROUND_COLOR_RES_ID,-1);
-        onboardingFragmentList = (List<OnboardingFragment>) bundle.getSerializable(ONBOARDING_FRAGMENT_LIST);
+        onboardingPages = (List<OnboardingPage>) bundle.getSerializable(ONBOARDING_FRAGMENT_LIST);
 
         //Set the view pager
         //TODO Implement a non-swiping version
@@ -123,12 +123,13 @@ public class OnboardingActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return onboardingFragmentList.get(position);
+            //Build a new fragment from an Onboarding Page (Since Fragment bundles don't seem to be serializable
+            return OnboardingFragment.newInstance(onboardingPages.get(position));
         }
 
         @Override
         public int getCount() {
-            return onboardingFragmentList.size();
+            return onboardingPages.size();
         }
     }
 }
