@@ -13,6 +13,7 @@
     <ImageView android:id="@+id/onboarding_background_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -24,7 +25,8 @@
 
         <com.github.jrejaud.viewpagerindicator2.CirclePageIndicator
             android:id="@+id/onboadring_page_indicator"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -32,6 +34,7 @@
             app:radius="5dp" />
 
     </LinearLayout>
+
 
 
 
