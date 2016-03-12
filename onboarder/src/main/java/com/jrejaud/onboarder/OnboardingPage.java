@@ -14,7 +14,7 @@ public class OnboardingPage implements Serializable {
     private @DrawableRes
     int imageResId;
 
-    public interface onButtonClickedListener {
+    public interface onButtonClickedListener extends Serializable {
         void onButtonClicked();
     }
 
