@@ -74,6 +74,31 @@ Intent intent = new Intent(this,OnboardingActivity.class);
 intent.putExtras(onboardingActivityBundle);
 startActivity(intent);
 ```
+####Custom onButtonClick actions
+By default, clicking a button in an **Onboarding Fragment** will move to the next one in the list.  
+If the **Onboarding Activity** is on the last **Onboarding Fragment**, it will simple `finish()` itself.  
+
+If you want something different to happen when the user clicks a button in an **Onboarding Fragment**, extend the **Onboarding Activitiy** and override the `onOnboardingClick` method.  
+
+It will pass the fragment position inside of the list that the user clicked.
+```
+public class MyOnboardingActivity extends OnboardingActivity {
+
+    @Override
+    public void onOnboardingClick(int position) {
+        Log.d("TAG", "Position is: " + position);
+    }
+}
+```
+Next, simply start your **Onboarding Activity** instead of the normal one.
+
+```
+//Start your version of the Onboarding Activity
+Intent intent = new Intent(this,MyOnboardingActivity.class);
+intent.putExtras(onboardingActivityBundle);
+startActivity(intent);
+```
+
 
 Installation
 =====
