@@ -2,8 +2,10 @@ package com.jrejaud.onboarder;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,6 @@ import java.io.Serializable;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnboardingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link OnboardingFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -30,6 +31,7 @@ public class OnboardingFragment extends Fragment implements Serializable {
     private static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     private static final String POSITION = "POSITION";
     private static final String  BUTTON_TEXT = "BUTTON_TEXT";
+    public final static String BUTTON_BACKGROUND_COLOR = "BUTTON_BACKGROUND_COLOR";
 
     public OnboardingFragment() {
         // Required empty public constructor
@@ -39,9 +41,9 @@ public class OnboardingFragment extends Fragment implements Serializable {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param title The title which is displayed at the top of the fragment.
-     * @param bodyText The body text which is displayed in the middle of the fragment.
-     * @param imageResId The image resource which is displayed in the middle of the fragment, above the text
+//     * @param title The title which is displayed at the top of the fragment.
+//     * @param bodyText The body text which is displayed in the middle of the fragment.
+//     * @param imageResId The image resource which is displayed in the middle of the fragment, above the text
      * @return A new instance of fragment OnboardingFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -53,6 +55,7 @@ public class OnboardingFragment extends Fragment implements Serializable {
         args.putInt(IMAGE_RESOURCE_ID, onboardingPage.getImageResId());
         args.putInt(POSITION, position);
         args.putString(BUTTON_TEXT, onboardingPage.getButtonText());
+//        args.putSerializable(BUTTON_BACKGROUND_COLOR,onboardingPage.getButtonColorResId());
         fragment.setArguments(args);
         return fragment;
     }
@@ -75,6 +78,8 @@ public class OnboardingFragment extends Fragment implements Serializable {
         final int position = bundle.getInt(POSITION, 0);
         /* The button text (if the user set any) */
         String buttonText = bundle.getString(BUTTON_TEXT, null);
+
+//        @ColorRes int buttonBackgroundColor = bundle.getInt(BUTTON_BACKGROUND_COLOR,-1);
 
         TextView titleTextView = (TextView) view.findViewById(R.id.onboarding_fragment_title);
         TextView bodyTextView = (TextView) view.findViewById(R.id.onboarding_fragment_body_text);

@@ -45,6 +45,7 @@
         android:layout_marginRight="20dp"/>
 
     <Button
+        android:theme="@style/OnboardingButton"
         android:id="@+id/onboarding_fragment_button"
         android:text="Fragment Button Text"
         android:layout_width="match_parent"
