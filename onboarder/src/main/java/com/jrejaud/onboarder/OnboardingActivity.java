@@ -20,8 +20,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public abstract class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
-    public final static int ONBOARDING_REQUEST_CODE = 51635;
-    public final static String POSITION = "POSITION";
 
     private final static String BACKGROUND_IMAGE_RES_ID = "BACKGROUND_IMAGE_RES_ID";
     private @DrawableRes int backgroundImageResId;
@@ -39,8 +37,6 @@ public abstract class OnboardingActivity extends AppCompatActivity implements On
     /** Whether the pagination dots at the bottom of the activity should be down of not */
     private final static String HIDE_DOT_PAGINATION = "HIDE_DOT_PAGINATION";
     private boolean hideDotPagination;
-
-    private OnButtonClickedListener onButtonClickedListener;
 
     //region Static Factory Methods
     public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, @NonNull List<OnboardingPage> onboardingPages) {
@@ -141,13 +137,7 @@ public abstract class OnboardingActivity extends AppCompatActivity implements On
     }
 
     @Override
-    public abstract void onOnboardingClick(int position);
-
-//    {
-//        //If this is the last
-//        Intent clickIntent = new Intent();
-//        clickIntent.putExtra(POSITION, position);
-//        setResult(Activity.RESULT_OK,clickIntent);
-//        finish();
-//    }
+    public void onOnboardingClick(int position) {
+        //Extend Onboarding Activity Click and override this method to make it do stuff
+    };
 }
