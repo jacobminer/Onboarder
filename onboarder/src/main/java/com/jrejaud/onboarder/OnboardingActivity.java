@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,7 +20,7 @@ import com.github.jrejaud.viewpagerindicator2.CirclePageIndicator;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
+public class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
 
     private final static String BACKGROUND_IMAGE_RES_ID = "BACKGROUND_IMAGE_RES_ID";
     private @DrawableRes int backgroundImageResId;
@@ -83,12 +84,13 @@ public abstract class OnboardingActivity extends AppCompatActivity implements On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onboarding);
+
+        //Try to hide the support action bar
+        getSupportActionBar().hide();
 
         //Extract Data from the Bundle
         Bundle bundle = getIntent().getExtras();
 
-        //Todo need to implement a non-swiping version
         swipingEnabled = bundle.getBoolean(SWIPING_ENABLED, true);
         hideDotPagination = bundle.getBoolean(HIDE_DOT_PAGINATION, false);
         backgroundImageResId = bundle.getInt(BACKGROUND_IMAGE_RES_ID, -1); //-1 means that no image was passed
@@ -96,16 +98,22 @@ public abstract class OnboardingActivity extends AppCompatActivity implements On
         onboardingPages = (List<OnboardingPage>) bundle.getSerializable(ONBOARDING_FRAGMENT_LIST);
 
         //Set the view pager
-        //TODO Implement a non-swiping version
-        ViewPager viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
-        viewPager.setAdapter(new OnboardingFragmentPagerAdapter(getSupportFragmentManager()));
+        if (swipingEnabled) {
+            setContentView(R.layout.activity_onboarding);
+            ViewPager viewPager = (ViewPager) findViewById(R.id.onboarding_viewpager);
+            viewPager.setAdapter(new OnboardingFragmentPagerAdapter(getSupportFragmentManager()));
 
-        //Set the dot pagination
-        CirclePageIndicator circlePageIndicator = (CirclePageIndicator)findViewById(R.id.onboadring_page_indicator);
-        if (!hideDotPagination) {
-            circlePageIndicator.setViewPager(viewPager);
+            //Set the dot pagination. It can only be set if swiping is enabled.
+            CirclePageIndicator circlePageIndicator = (CirclePageIndicator)findViewById(R.id.onboadring_page_indicator);
+            if (!hideDotPagination) {
+                circlePageIndicator.setViewPager(viewPager);
+            } else {
+                circlePageIndicator.setVisibility(View.GONE);
+            }
+
         } else {
-            circlePageIndicator.setVisibility(View.GONE);
+            //Non-swiping version
+            setContentView(R.layout.activity_onboarding);
         }
 
         //Set the background Image or Color
@@ -139,5 +147,6 @@ public abstract class OnboardingActivity extends AppCompatActivity implements On
     @Override
     public void onOnboardingClick(int position) {
         //Extend Onboarding Activity Click and override this method to make it do stuff
-    };
+        Log.e(OnboardingActivity.class.getSimpleName(),"You need to extend Onboarding Activity and override onOnboardingClick to make stuff happen when you click a button!");
+    }
 }
