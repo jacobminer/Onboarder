@@ -11,12 +11,13 @@ import java.io.Serializable;
  */
 public class OnboardingPage implements Serializable {
     private String title;
+    private @ColorRes int titleTextColor = -1;
     private String bodyText;
+    private @ColorRes int bodyTextColor = -1;
     private @DrawableRes
     int imageResId = -1;
 
     private String buttonText = null;
-
 
     public String getTitle() {
         return title;
@@ -33,6 +34,23 @@ public class OnboardingPage implements Serializable {
     public String getButtonText() {
         return buttonText;
     }
+
+    public int getTitleTextColor() {
+        return titleTextColor;
+    }
+
+    public void setTitleTextColor(int titleTextColor) {
+        this.titleTextColor = titleTextColor;
+    }
+
+    public int getBodyTextColor() {
+        return bodyTextColor;
+    }
+
+    public void setBodyTextColor(int bodyTextColor) {
+        this.bodyTextColor = bodyTextColor;
+    }
+
 
 
     public OnboardingPage(@Nullable String title,@Nullable String bodyText) {

@@ -19,11 +19,12 @@ public class OnboardingFragment extends Fragment implements Serializable {
 
     // the fragment initialization parameters
     private static final String TITLE = "TITLE";
+    private final static String TITLE_TEXT_COLOR = "TITLE_TEXT_COLOR";
     private static final String BODY_TEXT = "BODY_TEXT";
+    private final static String BODY_TEXT_COLOR = "TITLE_TEXT_COLOR";
     private static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     private static final String POSITION = "POSITION";
     private static final String  BUTTON_TEXT = "BUTTON_TEXT";
-    public final static String BUTTON_BACKGROUND_COLOR = "BUTTON_BACKGROUND_COLOR";
 
     public OnboardingFragment() {
         // Required empty public constructor
@@ -37,6 +38,8 @@ public class OnboardingFragment extends Fragment implements Serializable {
         args.putInt(IMAGE_RESOURCE_ID, onboardingPage.getImageResId());
         args.putInt(POSITION, position);
         args.putString(BUTTON_TEXT, onboardingPage.getButtonText());
+        args.putInt(TITLE_TEXT_COLOR, onboardingPage.getTitleTextColor());
+        args.putInt(BODY_TEXT_COLOR,onboardingPage.getBodyTextColor());
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,6 +63,9 @@ public class OnboardingFragment extends Fragment implements Serializable {
         /* The button text (if the user set any) */
         String buttonText = bundle.getString(BUTTON_TEXT, null);
 
+        @ColorRes int titleTextColor = bundle.getInt(TITLE_TEXT_COLOR, -1);
+        @ColorRes int bodyTextColor = bundle.getInt(BODY_TEXT_COLOR,-1);
+
         TextView titleTextView = (TextView) view.findViewById(R.id.onboarding_fragment_title);
         TextView bodyTextView = (TextView) view.findViewById(R.id.onboarding_fragment_body_text);
         ImageView imageView = (ImageView) view.findViewById(R.id.onboarding_fragment_image);
@@ -68,6 +74,10 @@ public class OnboardingFragment extends Fragment implements Serializable {
         //Set the title
         if (title !=null) {
             titleTextView.setText(title);
+            //Set the body text color
+            if (titleTextColor!=-1) {
+                titleTextView.setTextColor(getResources().getColor(titleTextColor));
+            }
         } else {
             titleTextView.setVisibility(View.GONE);
         }
@@ -75,6 +85,10 @@ public class OnboardingFragment extends Fragment implements Serializable {
         //Set the body text
         if (bodyText !=null) {
             bodyTextView.setText(bodyText);
+            //Set the body text color
+            if (bodyTextColor!=-1) {
+                bodyTextView.setTextColor(getResources().getColor(bodyTextColor));
+            }
         } else {
             bodyTextView.setVisibility(View.GONE);
         }
