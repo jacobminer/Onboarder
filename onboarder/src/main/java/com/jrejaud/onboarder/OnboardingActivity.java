@@ -19,7 +19,7 @@ import com.github.jrejaud.viewpagerindicator2.CirclePageIndicator;
 import java.io.Serializable;
 import java.util.List;
 
-public class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
+public abstract class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
     public final static int ONBOARDING_REQUEST_CODE = 51635;
     public final static String POSITION = "POSITION";
 
@@ -141,11 +141,13 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     }
 
     @Override
-    public void onOnboardingClick(int position) {
-        //If this is the last
-        Intent clickIntent = new Intent();
-        clickIntent.putExtra(POSITION, position);
-        setResult(Activity.RESULT_OK,clickIntent);
-        finish();
-    }
+    public abstract void onOnboardingClick(int position);
+
+//    {
+//        //If this is the last
+//        Intent clickIntent = new Intent();
+//        clickIntent.putExtra(POSITION, position);
+//        setResult(Activity.RESULT_OK,clickIntent);
+//        finish();
+//    }
 }
