@@ -1,5 +1,7 @@
 package com.jrejaud.onboarder;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -18,6 +20,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class OnboardingActivity extends AppCompatActivity implements OnboardingFragment.onOnboardingButtonClickListener {
+    public final static int ONBOARDING_REQUEST_CODE = 51635;
+    public final static String POSITION = "POSITION";
+
     private final static String BACKGROUND_IMAGE_RES_ID = "BACKGROUND_IMAGE_RES_ID";
     private @DrawableRes int backgroundImageResId;
     private final static String BACKGROUND_COLOR_RES_ID = "BACKGROUND_COLOR_RES_ID";
@@ -34,6 +39,8 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     /** Whether the pagination dots at the bottom of the activity should be down of not */
     private final static String HIDE_DOT_PAGINATION = "HIDE_DOT_PAGINATION";
     private boolean hideDotPagination;
+
+    private OnButtonClickedListener onButtonClickedListener;
 
     //region Static Factory Methods
     public static Bundle newBundleImageBackground(@DrawableRes int backgroundImageResId, @NonNull List<OnboardingPage> onboardingPages) {
@@ -135,6 +142,10 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
 
     @Override
     public void onOnboardingClick(int position) {
-        onboardingPages.get(position).getOnButtonClickedListener().onButtonClicked();
+        //If this is the last
+        Intent clickIntent = new Intent();
+        clickIntent.putExtra(POSITION, position);
+        setResult(Activity.RESULT_OK,clickIntent);
+        finish();
     }
 }
