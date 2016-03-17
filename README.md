@@ -1,4 +1,7 @@
 # Onboarder
+
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 Onboarding Library for Android
 Inspired by [Onboard](https://github.com/mamaral/Onboard) for iOS.  
 This is a simple library to quickly create Onboarding inside your app.  
@@ -118,8 +121,13 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependencies:
 ```
 dependencies {
-		compile 'com.github.User:Repo:Tag'
+		compile 'com.github.jrejaud:Onboarder:v0.01'
 	}
 ```
 
 For more info, check the [JitPack page](https://jitpack.io/#jrejaud/Onboarder)
+
+Credits
+=====
+[ViewPagerIndicator2](https://github.com/jrejaud/ViewPagerIndicator2)  
+An (mildly) improved (ViewPagerIndicator)[https://github.com/JakeWharton/ViewPagerIndicator], originally by Jake Wharton
