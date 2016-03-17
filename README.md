@@ -1,5 +1,6 @@
 # Onboarder
 
+[![](https://jitpack.io/v/jrejaud/Onboarder.svg)](https://jitpack.io/#jrejaud/Onboarder)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 Onboarding Library for Android
@@ -110,18 +111,17 @@ Gradle Installation:
 
 Add it in your root build.gradle at the end of repositories:
 ```
-	allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
+allprojects {
+	repositories {
+		maven { url "https://jitpack.io" }
 	}
+}
 ```
 
 Add the dependencies:
 ```
 dependencies {
-		compile 'com.github.jrejaud:Onboarder:v1.01'
+	compile 'com.github.jrejaud:Onboarder:v1.02'
 	}
 ```
 
