@@ -121,7 +121,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependencies:
 ```
 dependencies {
-		compile 'com.github.jrejaud:Onboarder:v0.01'
+		compile 'com.github.jrejaud:Onboarder:v1.01'
 	}
 ```
 
