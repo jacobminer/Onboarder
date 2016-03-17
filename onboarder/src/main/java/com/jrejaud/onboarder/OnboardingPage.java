@@ -17,25 +17,27 @@ public class OnboardingPage implements Serializable {
     private @DrawableRes
     int imageResId = -1;
 
+    int maxImageHeight = -1;
+
     private String buttonText = null;
 
-    public String getTitle() {
+    protected String getTitle() {
         return title;
     }
 
-    public String getBodyText() {
+    protected String getBodyText() {
         return bodyText;
     }
 
-    public int getImageResId() {
+    protected int getImageResId() {
         return imageResId;
     }
 
-    public String getButtonText() {
+    protected String getButtonText() {
         return buttonText;
     }
 
-    public int getTitleTextColor() {
+    protected int getTitleTextColor() {
         return titleTextColor;
     }
 
@@ -43,7 +45,7 @@ public class OnboardingPage implements Serializable {
         this.titleTextColor = titleTextColor;
     }
 
-    public int getBodyTextColor() {
+    protected int getBodyTextColor() {
         return bodyTextColor;
     }
 
@@ -80,6 +82,15 @@ public class OnboardingPage implements Serializable {
         this.bodyText = bodyText;
         this.buttonText = buttonText;
     }
+
+    protected int getMaxImageHeight() {
+        return maxImageHeight;
+    }
+
+    public void setMaxImageHeight(int maxImageHeight) {
+        this.maxImageHeight = maxImageHeight;
+    }
+
 
 
 }

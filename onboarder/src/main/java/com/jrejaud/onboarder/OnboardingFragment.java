@@ -25,6 +25,7 @@ public class OnboardingFragment extends Fragment implements Serializable {
     private static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     private static final String POSITION = "POSITION";
     private static final String  BUTTON_TEXT = "BUTTON_TEXT";
+    private static final String MAX_IMAGE_HEIGHT = "MAX_IMAGE_HEIGHT";
 
     public OnboardingFragment() {
         // Required empty public constructor
@@ -40,6 +41,7 @@ public class OnboardingFragment extends Fragment implements Serializable {
         args.putString(BUTTON_TEXT, onboardingPage.getButtonText());
         args.putInt(TITLE_TEXT_COLOR, onboardingPage.getTitleTextColor());
         args.putInt(BODY_TEXT_COLOR,onboardingPage.getBodyTextColor());
+        args.putInt(MAX_IMAGE_HEIGHT, onboardingPage.getMaxImageHeight());
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,6 +64,8 @@ public class OnboardingFragment extends Fragment implements Serializable {
         final int position = bundle.getInt(POSITION, 0);
         /* The button text (if the user set any) */
         String buttonText = bundle.getString(BUTTON_TEXT, null);
+        /* Max height for the image (if not, it just scales it up) */
+        int maxImageHeight = bundle.getInt(MAX_IMAGE_HEIGHT,-1);
 
         @ColorRes int titleTextColor = bundle.getInt(TITLE_TEXT_COLOR, -1);
         @ColorRes int bodyTextColor = bundle.getInt(BODY_TEXT_COLOR,-1);
@@ -96,6 +100,10 @@ public class OnboardingFragment extends Fragment implements Serializable {
         //Set the image
         if (imageResId !=-1) {
             imageView.setImageResource(imageResId);
+            //Set the max image height (if it was set)
+            if (maxImageHeight !=-1) {
+                imageView.setMaxHeight(maxImageHeight);
+            }
         } else {
             imageView.setVisibility(View.GONE);
         }
