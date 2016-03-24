@@ -23,7 +23,7 @@ Usage
 First, build **Onboarding Pages**. Each page relates to an **Onboarding Fragment** inside your **Onboarding Activitiy**.  
 You can pass a *title*, *body text*, and *drawable resource int*, as well as *button text*.  
 If you do not want a button in your **Onboarding Fragment**, user the Constructor method with no *button text* parameter.  
-```
+```java
 //Building Onboarding Pages
 OnboardingPage page1 = new OnboardingPage("First screen title","This is important information, pay attention",R.drawable.logo);
 OnboardingPage page2 = new OnboardingPage(null,"This is a robut.",R.drawable.logo,"Okay, tell me more");
@@ -31,7 +31,7 @@ OnboardingPage page3 = new OnboardingPage("The Robot again!","Hey look, it's the
 ```
 
 ####Optional Settings
-```
+```java
 //Optionally set the title and body text colors for a specific page.
 page1.setTitleTextColor(R.color.white);
 page1.setBodyTextColor(R.color.white);
@@ -52,19 +52,19 @@ onboardingPages.add(page3);
 
 ###Onboarding Activity
 ####Setting a color as background
-```
+```java
 //Create a bundle for the Onboarding Activity
 Bundle onboardingActivityBundle = OnboardingActivity.newBundleColorBackground(R.color.greenBackground, onboardingPages);
 ```
 
 ####Setting a color as background
-```
+```java
 //Create a bundle for the Onboarding Activity
 Bundle onboardingActivityBundle = OnboardingActivity..newBundleImageBackground(R.drawable.backgroundPicture, onboardingPages);
 ```
 
 ####Optional Settings
-```
+```java
 //Optionally set if the user can swipe between fragments. True by default.
 onboardingActivityBundle.putBoolean(OnboardingActivity.SWIPING_ENABLED,true);
 
@@ -73,7 +73,7 @@ onboardingActivityBundle.putBoolean(OnboardingActivity.HIDE_DOT_PAGINATION,false
 ```
 
 ####Starting the Onboarding Activity
-```
+```java
 //Start the Onboarding Activity
 Intent intent = new Intent(this,OnboardingActivity.class);
 intent.putExtras(onboardingActivityBundle);
@@ -86,7 +86,7 @@ If the **Onboarding Activity** is on the last **Onboarding Fragment**, it will s
 If you want something different to happen when the user clicks a button in an **Onboarding Fragment**, extend the **Onboarding Activitiy** and override the `onOnboardingClick` method.  
 
 It will pass the fragment position inside of the list that the user clicked.
-```
+```java
 public class MyOnboardingActivity extends OnboardingActivity {
 
     @Override
@@ -97,7 +97,7 @@ public class MyOnboardingActivity extends OnboardingActivity {
 ```
 Next, simply start your **Onboarding Activity** instead of the normal one.
 
-```
+```java
 //Start your version of the Onboarding Activity
 Intent intent = new Intent(this,MyOnboardingActivity.class);
 intent.putExtras(onboardingActivityBundle);
@@ -111,7 +111,7 @@ Onboarder uses [JitPack](https://jitpack.io/#jrejaud/Onboarder)
 Gradle Installation:
 
 Add it in your root build.gradle at the end of repositories:
-```
+```groovy
 allprojects {
 	repositories {
 		maven { url "https://jitpack.io" }
@@ -120,7 +120,7 @@ allprojects {
 ```
 
 Add the dependencies:
-```
+```groovy
 dependencies {
 	compile 'com.github.jrejaud:Onboarder:v1.02'
 	}
