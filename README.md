@@ -128,7 +128,7 @@ dependencies {
 
 For more info, check the [JitPack page](https://jitpack.io/#jrejaud/Onboarder)
 
-Credits
+Libraries used
 =====
 [ViewPagerIndicator2](https://github.com/jrejaud/ViewPagerIndicator2)  
-An (mildly) improved (ViewPagerIndicator)[https://github.com/JakeWharton/ViewPagerIndicator], originally by Jake Wharton
+An (mildly) improved [ViewPagerIndicator](https://github.com/JakeWharton/ViewPagerIndicator), originally by Jake Wharton
