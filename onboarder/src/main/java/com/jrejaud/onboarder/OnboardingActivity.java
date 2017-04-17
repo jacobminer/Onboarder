@@ -114,14 +114,22 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     }
 
     /** Convenience method invoked by the user to make to the next page in the list (if there are any left) */
-    public void goToNextFragment(int currentPosition) {
+    public void goToNextFragment(final int currentPosition) {
         //If there are no more pages left, then just finish the onboarding
         if (currentPosition+1>=onboardingFragmentPagerAdapter.getCount()) {
             finish();
             return;
         }
 
-        viewPager.setCurrentItem(currentPosition+1);
+        viewPager.post(new Runnable() {
+            @Override
+            public void run() {
+                if (onboardingFragmentPagerAdapter != null) {
+                    onboardingFragmentPagerAdapter.notifyDataSetChanged();
+                }
+                viewPager.setCurrentItem(currentPosition+1);
+            }
+        });
     }
 
     private class OnboardingFragmentPagerAdapter extends FragmentPagerAdapter {
