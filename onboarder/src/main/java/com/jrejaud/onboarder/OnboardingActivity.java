@@ -114,7 +114,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     }
 
     /** Convenience method invoked by the user to make to the next page in the list (if there are any left) */
-    private void goToNextFragment(int currentPosition) {
+    public void goToNextFragment(int currentPosition) {
         //If there are no more pages left, then just finish the onboarding
         if (currentPosition+1>=onboardingFragmentPagerAdapter.getCount()) {
             finish();

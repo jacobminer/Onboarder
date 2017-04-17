@@ -7,12 +7,15 @@
 
     <TextView
         android:id="@+id/onboarding_fragment_title"
-        android:text="Fragment Title"
+        tools:text="Fragment Title"
         android:textSize="@dimen/abc_text_size_large_material"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="60dp"
+        android:focusable="true"
+        android:enabled="true"
+        android:clickable="true"
         android:lineSpacingExtra="5sp" />
 
     <FrameLayout
@@ -35,11 +38,14 @@
     <TextView
         android:id="@+id/onboarding_fragment_body_text"
         android:textSize="@dimen/abc_text_size_medium_material"
-        android:text="Fragment Body Text"
+        tools:text="Fragment Body Text"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="60dp"
+        android:focusable="true"
+        android:enabled="true"
+        android:clickable="true"
         android:lineSpacingExtra="5sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -48,7 +54,10 @@
     <Button
         android:theme="@style/OnboardingButton"
         android:id="@+id/onboarding_fragment_button"
-        android:text="Fragment Button Text"
+        tools:text="Fragment Button Text"
+        android:focusable="true"
+        android:enabled="true"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
